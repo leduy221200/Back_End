@@ -21,19 +21,19 @@ public class AdminsController {
 	@Autowired
 	AdminsServices as;
 	
-	@RequestMapping(value = "/admins/getAdmin", method = RequestMethod.GET)
+	@RequestMapping(value = "/admins", method = RequestMethod.GET)
 	public List<Admins> getAllAdmins() {
 		List<Admins> listAdmins = new ArrayList<Admins>();
 		listAdmins =  (List<Admins>) as.findAll();
 		return listAdmins;
 	}
 	
-	@RequestMapping(value = "/admins/addAdmin", method = RequestMethod.POST)
+	@RequestMapping(value = "/admins/add", method = RequestMethod.POST)
 	public void addAdmin(@RequestBody Admins model) {
 		as.save(model);
 	}
 	
-	@RequestMapping(value = "/admins/editAdmin", method = RequestMethod.POST)
+	@RequestMapping(value = "/admins/edit", method = RequestMethod.POST)
 	public void editAdmin(@RequestBody Admins model) {
 		Optional<Admins> admin = as.findById(model.get_idAdmin());
 		if (admin.isPresent()) {
@@ -46,7 +46,7 @@ public class AdminsController {
 		}
 	}
 	
-	@RequestMapping(value = "/admins/deleteAdmin", method = RequestMethod.POST)
+	@RequestMapping(value = "/admins/delete", method = RequestMethod.POST)
 	public void deleteAdmin(@RequestBody Admins model) {
 		Optional<Admins> admin = as.findById(model.get_idAdmin());
 		if (admin.isPresent()) {

@@ -7,8 +7,9 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+@SuppressWarnings("serial")
 @Entity
-@Table(name = "Admins")
+@Table(name = "admins")
 public class Admins implements Serializable{
 	@Id
 	@Column( name = "_idAdmin", length = 5)
