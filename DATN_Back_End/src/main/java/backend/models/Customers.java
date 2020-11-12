@@ -21,10 +21,10 @@ public class Customers implements Serializable{
 	@Column(name = "passWord", length = 20)
 	private String passWord;
 	
-	@Column(name = "fullName", columnDefinition = "nvarchar",length = 30)
+	@Column(name = "fullName", columnDefinition = "nvarchar(30)", length = 30)
 	private String fullName;
 	
-	@Column(name = "birthDate", length = 8)
+	@Column(name = "birthDate", length = 10)
 	private String birthDate;
 	
 	@Column(name = "identityCard", length = 10)
@@ -48,7 +48,7 @@ public class Customers implements Serializable{
 	@Column(name = "score")
 	private Integer score;
 	
-	@Column(name = "bankNumber", length = 10)
+	@Column(name = "bankNumber", length = 15)
 	private String bankNumber;
 	
 	@Column(name = "role")

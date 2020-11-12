@@ -17,8 +17,11 @@ import backend.repositories.CustomersServices;
 public class LoginController {
 	
 	String message = "";
+	
 	@Autowired
 	AdminsServices as;
+	
+	@Autowired
 	CustomersServices cs;
 	
 	@RequestMapping(value = "/loginAdmin", method = RequestMethod.POST)
