@@ -41,7 +41,7 @@ public class CustomersController {
 		Optional<Customers> customer = cs.findById(model.get_idCustomer());
 		if (customer.isPresent()) {
 			customer.get().setFullName(model.getFullName());
-			customer.get().setBirthDate(model.getBirthDate());
+			customer.get().setBirthDay(model.getBirthDay());
 			customer.get().setEmail(model.getEmail());
 			customer.get().setBankNumber(model.getBankNumber());
 			customer.get().setGender(model.isGender());

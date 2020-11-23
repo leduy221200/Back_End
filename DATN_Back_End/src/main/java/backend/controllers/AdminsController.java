@@ -38,7 +38,7 @@ public class AdminsController {
 		Optional<Admins> admin = as.findById(model.get_idAdmin());
 		if (admin.isPresent()) {
 			admin.get().setFullName(model.getFullName());
-			admin.get().setBirthDate(model.getBirthDate());
+			admin.get().setBirthDay(model.getBirthDay());
 			admin.get().setEmail(model.getEmail());
 			admin.get().setStatus(model.isStatus());
 			admin.get().setIdentityCard(model.getIdentityCard());
