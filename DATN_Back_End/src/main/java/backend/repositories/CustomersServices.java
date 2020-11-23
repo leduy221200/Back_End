@@ -13,5 +13,7 @@ public interface CustomersServices {
 	Optional<Customers> findById(String id);
 
 	<S extends Customers> S save(S entity);
+
+	Integer findByUserName(String userName);
 	
 }
