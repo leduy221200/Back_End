@@ -23,34 +23,51 @@ public class AdminsController {
 	
 	@RequestMapping(value = "/admins", method = RequestMethod.GET)
 	public List<Admins> getAllAdmins() {
-		List<Admins> listAdmins = new ArrayList<Admins>();
-		listAdmins =  (List<Admins>) as.findAll();
-		return listAdmins;
+		try {
+			List<Admins> listAdmins = new ArrayList<Admins>();
+			listAdmins =  (List<Admins>) as.findAll();
+			return listAdmins;
+		} catch (Exception e) {
+			System.out.println("getAllAdmins: " + e);
+			return null;
+		}
 	}
 	
-	@RequestMapping(value = "/admins/add", method = RequestMethod.POST)
+	@RequestMapping(value = "/admins/new", method = RequestMethod.POST)
 	public void addAdmin(@RequestBody Admins model) {
-		as.save(model);
+		try {
+			as.save(model);
+		} catch (Exception e) {
+			System.out.println("addAdmin: " + e);
+		}
 	}
 	
 	@RequestMapping(value = "/admins/edit", method = RequestMethod.POST)
 	public void editAdmin(@RequestBody Admins model) {
-		Optional<Admins> admin = as.findById(model.get_idAdmin());
-		if (admin.isPresent()) {
-			admin.get().setFullName(model.getFullName());
-			admin.get().setBirthDay(model.getBirthDay());
-			admin.get().setEmail(model.getEmail());
-			admin.get().setStatus(model.isStatus());
-			admin.get().setIdentityCard(model.getIdentityCard());
-			as.save(admin.get());
+		try {
+			Optional<Admins> admin = as.findById(model.get_idAdmin());
+			if (admin.isPresent()) {
+				admin.get().setFullName(model.getFullName());
+				admin.get().setBirthDay(model.getBirthDay());
+				admin.get().setEmail(model.getEmail());
+				admin.get().setStatus(model.isStatus());
+				admin.get().setIdentityCard(model.getIdentityCard());
+				as.save(admin.get());
+			}
+		} catch (Exception e) {
+			System.out.println("editAdmin: " + e);
 		}
 	}
 	
 	@RequestMapping(value = "/admins/delete", method = RequestMethod.POST)
 	public void deleteAdmin(@RequestBody Admins model) {
-		Optional<Admins> admin = as.findById(model.get_idAdmin());
-		if (admin.isPresent()) {
-			as.deleteById(admin.get().get_idAdmin());
+		try {
+			Optional<Admins> admin = as.findById(model.get_idAdmin());
+			if (admin.isPresent()) {
+				as.deleteById(admin.get().get_idAdmin());
+			}
+		} catch (Exception e) {
+			System.out.println("deleteAdmin: " + e);
 		}
 	}
 	

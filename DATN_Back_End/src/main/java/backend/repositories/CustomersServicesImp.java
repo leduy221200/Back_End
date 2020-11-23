@@ -31,6 +31,10 @@ public class CustomersServicesImp implements CustomersServices{
 	public void deleteById(String id) {
 		cr.deleteById(id);
 	}
-	
-	
+
+	@Override
+	public Integer findByUserName(String userName) {
+		return cr.findByUserName(userName);
+	}
+		
 }

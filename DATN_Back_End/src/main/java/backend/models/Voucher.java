@@ -19,7 +19,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 
 @Entity
-@Table(name = "Vouchers")
+@Table(name = "vouchers")
 public class Voucher implements Serializable {
 
 	@Id
