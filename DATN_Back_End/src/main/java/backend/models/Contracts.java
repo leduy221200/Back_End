@@ -25,7 +25,7 @@ public class Contracts implements Serializable{
 	private String _idContract;
 	
 	@Column(name="ValueContract")
-	private float ValueContract;
+	private Double ValueContract;
 	
 	@Column(name="TypeContract")
 	private int TypeContract;
@@ -52,7 +52,7 @@ public class Contracts implements Serializable{
 		
 	}
 
-	public Contracts(String _idContract, float valueContract, int typeContract, Date endDate, boolean status,
+	public Contracts(String _idContract, Double valueContract, int typeContract, Date endDate, boolean status,
 			String note, Admins admins) {
 		this._idContract = _idContract;
 		ValueContract = valueContract;
@@ -71,11 +71,11 @@ public class Contracts implements Serializable{
 		this._idContract = _idContract;
 	}
 
-	public float getValueContract() {
+	public Double getValueContract() {
 		return ValueContract;
 	}
 
-	public void setValueContract(float valueContract) {
+	public void setValueContract(Double valueContract) {
 		ValueContract = valueContract;
 	}
 

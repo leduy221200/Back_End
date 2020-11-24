@@ -58,7 +58,7 @@ public class Customers implements Serializable{
 	private String Nationality;
 	
 	@Column(name = "Score")
-	private Integer Score;
+	private int Score;
 	
 	@Column(name = "BankNumber", length = 15)
 	private String BankNumber;
@@ -78,7 +78,7 @@ public class Customers implements Serializable{
 
 	public Customers(String _idCustomer, String userName, String passWord, String fullName, Date birthDay,
 			String identityCard, String email, String phone, String address, String image, boolean gender,
-			String nationality, Integer score, String bankNumber, boolean role) {
+			String nationality, int score, String bankNumber, boolean role) {
 		this._idCustomer = _idCustomer;
 		UserName = userName;
 		PassWord = passWord;
