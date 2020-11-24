@@ -18,7 +18,7 @@ public class Services implements Serializable{
 	@Column(name = "_idServices", length=5)
 	private String _idServices;
 	
-	@Column(name = "NameService", length=20)
+	@Column(name = "NameService", columnDefinition = "nvarchar(20)")
 	private String NameService;
 	
 	@Column(name = "Description", length=50)

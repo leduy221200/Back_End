@@ -16,7 +16,6 @@ import javax.persistence.TemporalType;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-
 @Entity
 @Table(name = "posts")
 public class Posts implements Serializable{
@@ -25,7 +24,7 @@ public class Posts implements Serializable{
 	@Column(name = "_idPost", length = 5)
 	private String _idPost;
 	
-	@Column(name = "Title", length = 50)
+	@Column(name = "Title", columnDefinition = "nvarchar(50)")
 	private String Title;
 	
 	@Column(name = "UrlPost", length = 100)
@@ -48,16 +47,16 @@ public class Posts implements Serializable{
 	@Column(name = "Price")
 	private Double Price;
 	
-	@Column(name = "Facility", length = 50)
+	@Column(name = "Facility", columnDefinition = "nvarchar(50)")
 	private String Facility;
 	
-	@Column(name = "Content", length = 1000)
+	@Column(name = "Content", columnDefinition = "nvarchar(1000)")
 	private String Content;
 	
-	@Column(name = "Address", length = 1000)
+	@Column(name = "Address", columnDefinition = "nvarchar(100)")
 	private String Address;
 	
-	@Column(name = "ContactName", length = 1000)
+	@Column(name = "ContactName", columnDefinition = "nvarchar(50)")
 	private String ContactName;
 	
 	@Column(name = "PhoneContact", length = 10)
@@ -66,11 +65,14 @@ public class Posts implements Serializable{
 	@Column(name = "Available")
 	private Boolean Available;
 	
-	@Column(name = "Comment", length = 150)
+	@Column(name = "Comment", columnDefinition = "nvarchar(150)")
 	private String Comment;
 	
 	@Column(name = "Rating")
 	private Integer Rating;
+	
+	@Column(name = "Censored")
+	private Integer Censored;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "_idAdmin")
@@ -80,7 +82,7 @@ public class Posts implements Serializable{
 	@JoinColumn(name = "_idCustomer")
 	private Customers customers;
 	
-	@OneToOne(fetch=FetchType.LAZY)
+	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "_idVoucher")
 	private Voucher vouchers;
 
@@ -253,6 +255,22 @@ public class Posts implements Serializable{
 
 	public void setCustomers(Customers customers) {
 		this.customers = customers;
+	}
+
+	public Integer getCensored() {
+		return Censored;
+	}
+
+	public void setCensored(Integer censored) {
+		Censored = censored;
+	}
+
+	public Voucher getVouchers() {
+		return vouchers;
+	}
+
+	public void setVouchers(Voucher vouchers) {
+		this.vouchers = vouchers;
 	}
 	
 }

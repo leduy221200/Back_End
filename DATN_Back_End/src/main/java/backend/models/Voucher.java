@@ -31,7 +31,7 @@ public class Voucher implements Serializable {
 	private String Discount;
 	
 	
-	@Column( name = "Content", length = 100)
+	@Column( name = "Content", columnDefinition = "nvarchar(100)")
 	private String Content;
 	
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
