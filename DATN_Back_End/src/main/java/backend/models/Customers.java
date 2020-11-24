@@ -29,7 +29,7 @@ public class Customers implements Serializable{
 	@Column(name = "PassWord", length = 20)
 	private String PassWord;
 	
-	@Column(name = "FullName", length = 30)
+	@Column(name = "FullName", columnDefinition = "nvarchar(50)")
 	private String FullName;
 	
 	@DateTimeFormat(pattern = "dd/MM/yyyy")

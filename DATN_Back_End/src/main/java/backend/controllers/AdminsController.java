@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import backend.models.Admins;
+import backend.models.Posts;
 import backend.repositories.AdminsServices;
+import backend.repositories.PostsServices;
 
 @CrossOrigin(origins = "http://127.0.0.1:5500")
 @RestController
@@ -20,6 +22,9 @@ public class AdminsController {
 
 	@Autowired
 	AdminsServices as;
+	
+	@Autowired
+	PostsServices ps;
 	
 	@RequestMapping(value = "/admins", method = RequestMethod.GET)
 	public List<Admins> getAllAdmins() {
@@ -68,6 +73,19 @@ public class AdminsController {
 			}
 		} catch (Exception e) {
 			System.out.println("deleteAdmin: " + e);
+		}
+	}
+	
+	@RequestMapping(value = "/admins/censored", method = RequestMethod.POST)
+	public void censoredPost(@RequestBody Posts model) {
+		try {
+			Optional<Posts> post = ps.findById(model.get_idPost());
+			if (post.isPresent()) {
+				post.get().setCensored(model.getCensored());
+				ps.save(post.get());
+			}
+		} catch (Exception e) {
+			System.out.println("censoredPost: " + e);
 		}
 	}
 	
