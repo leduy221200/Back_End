@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import backend.models.Contracts;
-import backend.models.Customers;
 import backend.models.Services;
 import backend.repositories.ServicesServices;
 

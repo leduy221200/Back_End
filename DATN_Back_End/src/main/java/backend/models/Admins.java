@@ -4,9 +4,9 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -15,13 +15,14 @@ import javax.persistence.TemporalType;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name = "admins")
 public class Admins implements Serializable{
 	@Id
-	@Column( name = "_idAdmin", length = 5)
-	private String _idAdmin;
+	@Column( name = "idAdmin", length = 5)
+	private String idAdmin;
 	
 	@Column( name = "PassWord", length = 20)
 	private String PassWord;
@@ -42,24 +43,28 @@ public class Admins implements Serializable{
 	@Column( name = "Status")
 	private boolean Status;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "admins")
-	private Set<Voucher> voucher;
+	@JsonBackReference
+	@OneToMany(mappedBy = "admins", cascade = CascadeType.ALL)
+	private Set<Voucher> idVoucher;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "admins")
-	private Set<Posts> _idPost;
+	@JsonBackReference
+	@OneToMany(mappedBy = "admins", cascade = CascadeType.ALL)
+	private Set<Posts> idPost;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "admins")
+	@JsonBackReference
+	@OneToMany(mappedBy = "admins", cascade = CascadeType.ALL)
 	private Set<Services> idService;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "admins")
+	@JsonBackReference
+	@OneToMany(mappedBy = "admins", cascade = CascadeType.ALL)
 	private Set<Contracts> idContract;
 
 	public Admins() {
 		
 	}
 	
-	public Admins(String _idAdmin, String passWord, String fullName, Date birthDay, String identityCard, String email, boolean status) {
-		this._idAdmin = _idAdmin;
+	public Admins(String idAdmin, String passWord, String fullName, Date birthDay, String identityCard, String email, boolean status) {
+		this.idAdmin = idAdmin;
 		PassWord = passWord;
 		FullName = fullName;
 		BirthDay = birthDay;
@@ -68,12 +73,12 @@ public class Admins implements Serializable{
 		Status = status;
 	}
 
-	public String get_idAdmin() {
-		return _idAdmin;
+	public String getidAdmin() {
+		return idAdmin;
 	}
 
-	public void set_idAdmin(String _idAdmin) {
-		this._idAdmin = _idAdmin;
+	public void setidAdmin(String idAdmin) {
+		this.idAdmin = idAdmin;
 	}
 
 	public String getPassWord() {
@@ -125,19 +130,19 @@ public class Admins implements Serializable{
 	}
 
 	public Set<Voucher> getVoucher() {
-		return voucher;
+		return idVoucher;
 	}
 
-	public void setVoucher(Set<Voucher> voucher) {
-		this.voucher = voucher;
+	public void setVoucher(Set<Voucher> idVoucher) {
+		this.idVoucher = idVoucher;
 	}
 
-	public Set<Posts> get_idPost() {
-		return _idPost;
+	public Set<Posts> getidPost() {
+		return idPost;
 	}
 
-	public void set_idPost(Set<Posts> _idPost) {
-		this._idPost = _idPost;
+	public void set_idPost(Set<Posts> idPost) {
+		this.idPost = idPost;
 	}
 
 	public Set<Services> getIdService() {

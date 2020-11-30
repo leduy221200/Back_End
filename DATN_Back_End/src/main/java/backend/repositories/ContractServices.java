@@ -5,7 +5,7 @@ import java.util.Optional;
 
 import backend.models.Contracts;
 
-public interface ContactServices {
+public interface ContractServices {
 
 	void deleteAll();
 
@@ -26,5 +26,7 @@ public interface ContactServices {
 	List<Contracts> saveAll(List<Contracts> entities);
 
 	Contracts save(Contracts entity);
+
+	List<Contracts> getHostByAdmin(String idAdmin);
 
 }

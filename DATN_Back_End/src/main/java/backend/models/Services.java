@@ -1,27 +1,30 @@
 package backend.models;
 
 import java.io.Serializable;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import net.bytebuddy.build.ToStringPlugin.Exclude;
 
 @Entity
 @Table(name = "services")
 public class Services implements Serializable{
 
 	@Id
-	@Column(name = "_idServices", length=5)
-	private String _idServices;
+	@Column(name = "idServices", length = 5)
+	private String idServices;
 	
 	@Column(name = "NameService", columnDefinition = "nvarchar(20)")
 	private String NameService;
 	
-	@Column(name = "Description", length=50)
+	@Column(name = "Description", columnDefinition = "nvarchar(50)")
 	private String Description;
 	
 	@Column(name = "Price")
@@ -30,35 +33,34 @@ public class Services implements Serializable{
 	@Column(name = "Status")
 	private boolean Status;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "_idAdmin")
+	@ManyToOne
+	@JoinColumn(name = "idAdmin")
 	private Admins admins;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "_idbilldetail")
-	private Bill_Detail bills_detail;
+	@ManyToMany(mappedBy = "services")
+	@Exclude
+	private Set<Bill_Detail> bill_detail;
 
 	public Services() {
 
 	}
 
-	public Services(String _idServices, String nameService, String description, Double price, boolean status,
-			Admins admins, Bill_Detail bills_detail) {
-		this._idServices = _idServices;
+	public Services(String idServices, String nameService, String description, Double price, boolean status,
+			Admins admins) {
+		this.idServices = idServices;
 		NameService = nameService;
 		Description = description;
 		Price = price;
 		Status = status;
 		this.admins = admins;
-		this.bills_detail = bills_detail;
 	}
 
 	public String get_idServices() {
-		return _idServices;
+		return idServices;
 	}
 
 	public void set_idServices(String _idServices) {
-		this._idServices = _idServices;
+		this.idServices = _idServices;
 	}
 
 	public String getNameService() {
@@ -100,15 +102,5 @@ public class Services implements Serializable{
 	public void setAdmins(Admins admins) {
 		this.admins = admins;
 	}
-
-	public Bill_Detail getBills_detail() {
-		return bills_detail;
-	}
-
-	public void setBills_detail(Bill_Detail bills_detail) {
-		this.bills_detail = bills_detail;
-	}
-
-	
 	
 }

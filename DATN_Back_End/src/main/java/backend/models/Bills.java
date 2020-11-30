@@ -4,9 +4,9 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -18,13 +18,15 @@ import javax.persistence.TemporalType;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "bills")
 public class Bills implements Serializable{
 
 	@Id
-	@Column(name="_idBill",length=5)
-	private String _idBill;
+	@Column(name="idBill",length=5)
+	private String idBill;
 	
 	@Column(name="Status")
 	private boolean Status;
@@ -37,23 +39,26 @@ public class Bills implements Serializable{
 	@Temporal(TemporalType.DATE)
 	private Date PayDate;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "_idCustomer")
+	@JsonBackReference
+	@ManyToOne
+	@JoinColumn(name = "idCustomer")
 	private Customers customers;
 	
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "_idPost")
+	@JsonBackReference
+	@OneToOne
+	@JoinColumn(name = "idPost")
 	private Posts Post;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "bills")
-	private Set<Bill_Detail> idBill_Details;
+	@JsonBackReference
+	@OneToMany(mappedBy = "bills", cascade = CascadeType.ALL)
+	private Set<Bill_Detail> idBillDetail;
 
 	public Bills() {
 		
 	}
 
-	public Bills(String _idBill, boolean status, Date outputDate, Date payDate, Customers customers, Posts post) {
-		this._idBill = _idBill;
+	public Bills(String idBill, boolean status, Date outputDate, Date payDate, Customers customers, Posts post) {
+		this.idBill = idBill;
 		Status = status;
 		OutputDate = outputDate;
 		PayDate = payDate;
@@ -62,11 +67,11 @@ public class Bills implements Serializable{
 	}
 
 	public String get_idBill() {
-		return _idBill;
+		return idBill;
 	}
 
-	public void set_idBill(String _idBill) {
-		this._idBill = _idBill;
+	public void set_idBill(String idBill) {
+		this.idBill = idBill;
 	}
 
 	public boolean isStatus() {
@@ -110,11 +115,11 @@ public class Bills implements Serializable{
 	}
 
 	public Set<Bill_Detail> getIdBill_Details() {
-		return idBill_Details;
+		return idBillDetail;
 	}
 
-	public void setIdBill_Details(Set<Bill_Detail> idBill_Details) {
-		this.idBill_Details = idBill_Details;
+	public void setIdBill_Details(Set<Bill_Detail> idBillDetail) {
+		this.idBillDetail = idBillDetail;
 	}
 
 }
