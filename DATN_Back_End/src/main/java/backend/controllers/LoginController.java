@@ -26,7 +26,7 @@ public class LoginController {
 	
 	@RequestMapping(value = "/loginAdmin", method = RequestMethod.POST)
 	public String loginAdmin(@RequestBody Admins model) {	
-		Optional<Admins> checkLogin = as.findById(model.get_idAdmin());
+		Optional<Admins> checkLogin = as.findById(model.getidAdmin());
 		if (checkLogin.isPresent()) {
 			if (checkLogin.get().getPassWord().matches(model.getPassWord())) {
 				return "/adminManager";

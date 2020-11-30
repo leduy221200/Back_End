@@ -5,7 +5,6 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -21,8 +20,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class Posts implements Serializable{
 	
 	@Id
-	@Column(name = "_idPost", length = 5)
-	private String _idPost;
+	@Column(name = "idPost", length = 5)
+	private String idPost;
 	
 	@Column(name = "Title", columnDefinition = "nvarchar(50)")
 	private String Title;
@@ -46,9 +45,6 @@ public class Posts implements Serializable{
 	
 	@Column(name = "Price")
 	private Double Price;
-	
-	@Column(name = "Facility", columnDefinition = "nvarchar(50)")
-	private String Facility;
 	
 	@Column(name = "Content", columnDefinition = "nvarchar(1000)")
 	private String Content;
@@ -74,26 +70,29 @@ public class Posts implements Serializable{
 	@Column(name = "Censored")
 	private Integer Censored;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "_idAdmin")
+	@ManyToOne
+	@JoinColumn(name = "idAdmin")
+//	@JsonBackReference
 	private Admins admins;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "_idCustomer")
+//	@JsonBackReference
+	@ManyToOne
+	@JoinColumn(name = "idCustomer")
 	private Customers customers;
 	
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "_idVoucher")
+//	@JsonBackReference
+	@OneToOne
+	@JoinColumn(name = "idVoucher")
 	private Voucher vouchers;
 
 	public Posts() {
 	
 	}
 
-	public Posts(String _idPost, String title, String urlPost, String images, Date postDate, Date endDate, Double size,
-			Double price, String facility, String content, String address, String contactName, String phoneContact,
+	public Posts(String idPost, String title, String urlPost, String images, Date postDate, Date endDate, Double size,
+			Double price, String content, String address, String contactName, String phoneContact,
 			Boolean available, String comment, Integer rating, Admins admins, Customers customers) {
-		this._idPost = _idPost;
+		this.idPost = idPost;
 		Title = title;
 		UrlPost = urlPost;
 		Images = images;
@@ -101,7 +100,6 @@ public class Posts implements Serializable{
 		EndDate = endDate;
 		Size = size;
 		Price = price;
-		Facility = facility;
 		Content = content;
 		Address = address;
 		ContactName = contactName;
@@ -114,11 +112,11 @@ public class Posts implements Serializable{
 	}
 
 	public String get_idPost() {
-		return _idPost;
+		return idPost;
 	}
 
-	public void set_idPost(String _idPost) {
-		this._idPost = _idPost;
+	public void set_idPost(String idPost) {
+		this.idPost = idPost;
 	}
 
 	public String getTitle() {
@@ -175,14 +173,6 @@ public class Posts implements Serializable{
 
 	public void setPrice(Double price) {
 		Price = price;
-	}
-
-	public String getFacility() {
-		return Facility;
-	}
-
-	public void setFacility(String facility) {
-		Facility = facility;
 	}
 
 	public String getContent() {

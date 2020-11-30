@@ -5,7 +5,6 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -21,14 +20,11 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class Contracts implements Serializable{
 
 	@Id
-	@Column(name="_idContract", length=5)
-	private String _idContract;
+	@Column(name = "idContract", length=5)
+	private String idContract;
 	
-	@Column(name="ValueContract")
+	@Column(name = "ValueContract")
 	private Double ValueContract;
-	
-	@Column(name="TypeContract")
-	private int TypeContract;
 	
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	@Temporal(TemporalType.DATE)
@@ -40,23 +36,26 @@ public class Contracts implements Serializable{
 	@Column(name="Note", length=100)
 	private String Note;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name = "_idAdmin")
+//	@JsonManagedReference
+//	@JsonBackReference
+	@ManyToOne
+	@JoinColumn(name = "idAdmin")
 	private Admins admins;
 	
-	@OneToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="_idCustomer")
+//	@JsonManagedReference
+//	@JsonBackReference
+	@OneToOne
+	@JoinColumn(name ="idCustomer")
 	private Customers Customer;
 
 	public Contracts() {
 		
 	}
 
-	public Contracts(String _idContract, Double valueContract, int typeContract, Date endDate, boolean status,
+	public Contracts(String idContract, Double valueContract, Date endDate, boolean status,
 			String note, Admins admins) {
-		this._idContract = _idContract;
+		this.idContract = idContract;
 		ValueContract = valueContract;
-		TypeContract = typeContract;
 		EndDate = endDate;
 		Status = status;
 		Note = note;
@@ -64,11 +63,11 @@ public class Contracts implements Serializable{
 	}
 
 	public String get_idContract() {
-		return _idContract;
+		return idContract;
 	}
 
 	public void set_idContract(String _idContract) {
-		this._idContract = _idContract;
+		this.idContract = _idContract;
 	}
 
 	public Double getValueContract() {
@@ -78,15 +77,7 @@ public class Contracts implements Serializable{
 	public void setValueContract(Double valueContract) {
 		ValueContract = valueContract;
 	}
-
-	public int getTypeContract() {
-		return TypeContract;
-	}
-
-	public void setTypeContract(int typeContract) {
-		TypeContract = typeContract;
-	}
-
+	
 	public Date getEndDate() {
 		return EndDate;
 	}
@@ -126,5 +117,4 @@ public class Contracts implements Serializable{
 	public void setCustomer(Customers customer) {
 		Customer = customer;
 	}
-
 }

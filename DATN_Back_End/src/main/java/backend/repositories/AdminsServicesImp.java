@@ -1,5 +1,6 @@
 package backend.repositories;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,11 @@ public class AdminsServicesImp implements AdminsServices{
 	@Override
 	public void deleteById(String id) {
 		ar.deleteById(id);
+	}
+	
+	@Override
+	public List<Admins> getAllAdmin(){
+		return ar.getAllAdmin();
 	}
 	
 	

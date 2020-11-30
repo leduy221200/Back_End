@@ -9,11 +9,12 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import backend.models.Contracts;
 
-import backend.repositories.ContactServices;
+import backend.repositories.ContractServices;
 
 
 @CrossOrigin(origins = "http://127.0.0.1:5500")
@@ -21,10 +22,10 @@ import backend.repositories.ContactServices;
 public class ContractController {
 	
 	@Autowired
-	ContactServices cs;
+	ContractServices cs;
 	
 	@RequestMapping(value = "/contract", method = RequestMethod.GET)
-	public List<Contracts> getAllVouchers(){
+	public List<Contracts> getAllContracts(){
 		try {
 			List<Contracts> listContract = new ArrayList<Contracts>();
 			listContract = (List<Contracts>) cs.findAll();
@@ -51,12 +52,9 @@ public class ContractController {
 			Optional<Contracts> contract = cs.findById(model.get_idContract());
 			if (contract.isPresent()) {
 				contract.get().setValueContract(model.getValueContract());
-				contract.get().setTypeContract(model.getTypeContract());
 				contract.get().setEndDate(model.getEndDate());
 				contract.get().setStatus(model.isStatus());
 				contract.get().setNote(model.getNote());
-				contract.get().setAdmins(model.getAdmins());
-				contract.get().setCustomer(model.getCustomer());
 			}		
 		} catch (Exception e) {
 			System.out.println("editContract: " + e);
@@ -72,6 +70,16 @@ public class ContractController {
 			}		
 		} catch (Exception e) {
 			System.out.println("deleteContract: " + e);
+		}		
+	}
+	
+	@RequestMapping(value="/contract/getHost", method = RequestMethod.GET)
+	public List<Contracts> getHostByAdmin(@RequestParam String idAdmin) {
+		try {
+			return cs.getHostByAdmin(idAdmin);	
+		} catch (Exception e) {
+			System.out.println("getHostByAdmin: " + e);
+			return null;
 		}		
 	}
 

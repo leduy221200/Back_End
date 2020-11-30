@@ -6,7 +6,6 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -16,15 +15,16 @@ import javax.persistence.TemporalType;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "vouchers")
 public class Voucher implements Serializable {
 
 	@Id
-	@Column( name = "_idVoucher", length = 5)
-	private String _idVoucher;
+	@Column( name = "idVoucher", length = 5)
+	private String idVoucher;
 	
 	
 	@Column( name = "Discount", length = 4)
@@ -38,19 +38,19 @@ public class Voucher implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date EndDate;
 	
-	
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name = "_idAdmin")
+//	@JsonManagedReference
+	@JsonBackReference
+	@ManyToOne
+	@JoinColumn(name = "idAdmin")
 	private Admins admins;
 	
-
 	public Voucher() {
 		
 	}
 
 	public Voucher(String _idVoucher, String discount, String content, Date endDate, Admins Admins) {
 		super();
-		this._idVoucher = _idVoucher;
+		this.idVoucher = _idVoucher;
 		this.Discount = discount;
 		this.Content = content;
 		this.EndDate = endDate;
@@ -67,11 +67,11 @@ public class Voucher implements Serializable {
 	}
 
 	public String get_idVoucher() {
-		return _idVoucher;
+		return idVoucher;
 	}
 
-	public void set_idVoucher(String _idVoucher) {
-		this._idVoucher = _idVoucher;
+	public void set_idVoucher(String idVoucher) {
+		this.idVoucher = idVoucher;
 	}
 
 	public String getDiscount() {

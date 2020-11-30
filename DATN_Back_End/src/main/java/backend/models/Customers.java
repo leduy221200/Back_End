@@ -4,9 +4,9 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -15,13 +15,12 @@ import javax.persistence.TemporalType;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-
 @Entity
 @Table(name = "customers")
 public class Customers implements Serializable{
 	@Id
-	@Column(name = "_idCustomer", length = 5)
-	private String _idCustomer;
+	@Column(name = "idCustomer", length = 5)
+	private String idCustomer;
 	
 	@Column(name = "UserName", length = 15)
 	private String UserName;
@@ -48,7 +47,7 @@ public class Customers implements Serializable{
 	@Column(name = "Address", length = 50)
 	private String Address;
 	
-	@Column(name = "Image", length = 50)
+	@Column(name = "Image", length = 100)
 	private String Image;
 	
 	@Column(name = "Gender")
@@ -65,21 +64,21 @@ public class Customers implements Serializable{
 	
 	@Column(name = "Role")
 	private boolean Role;
-	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "customers")
+
+	@OneToMany(mappedBy = "customers")
 	private Set<Posts> idPosts;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "customers")
+	@OneToMany(mappedBy = "customers", cascade = CascadeType.ALL)
 	private Set<Bills> idBills;
 
 	public Customers() {
 
 	}
 
-	public Customers(String _idCustomer, String userName, String passWord, String fullName, Date birthDay,
+	public Customers(String idCustomer, String userName, String passWord, String fullName, Date birthDay,
 			String identityCard, String email, String phone, String address, String image, boolean gender,
 			String nationality, int score, String bankNumber, boolean role) {
-		this._idCustomer = _idCustomer;
+		this.idCustomer = idCustomer;
 		UserName = userName;
 		PassWord = passWord;
 		FullName = fullName;
@@ -97,11 +96,11 @@ public class Customers implements Serializable{
 	}
 
 	public String get_idCustomer() {
-		return _idCustomer;
+		return idCustomer;
 	}
 
 	public void set_idCustomer(String _idCustomer) {
-		this._idCustomer = _idCustomer;
+		this.idCustomer = _idCustomer;
 	}
 
 	public String getUserName() {

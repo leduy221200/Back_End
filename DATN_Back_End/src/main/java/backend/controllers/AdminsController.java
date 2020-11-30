@@ -38,6 +38,18 @@ public class AdminsController {
 		}
 	}
 	
+	@RequestMapping(value = "/admin", method = RequestMethod.GET)
+	public List<Admins> getAll() {
+		try {
+			List<Admins> listAdmins = new ArrayList<Admins>();
+			listAdmins = as.getAllAdmin();
+			return listAdmins;
+		} catch (Exception e) {
+			System.out.println("getAll: " + e);
+			return null;
+		}
+	}
+	
 	@RequestMapping(value = "/admins/new", method = RequestMethod.POST)
 	public void addAdmin(@RequestBody Admins model) {
 		try {
@@ -50,7 +62,7 @@ public class AdminsController {
 	@RequestMapping(value = "/admins/edit", method = RequestMethod.POST)
 	public void editAdmin(@RequestBody Admins model) {
 		try {
-			Optional<Admins> admin = as.findById(model.get_idAdmin());
+			Optional<Admins> admin = as.findById(model.getidAdmin());
 			if (admin.isPresent()) {
 				admin.get().setFullName(model.getFullName());
 				admin.get().setBirthDay(model.getBirthDay());
@@ -67,9 +79,9 @@ public class AdminsController {
 	@RequestMapping(value = "/admins/delete", method = RequestMethod.POST)
 	public void deleteAdmin(@RequestBody Admins model) {
 		try {
-			Optional<Admins> admin = as.findById(model.get_idAdmin());
+			Optional<Admins> admin = as.findById(model.getidAdmin());
 			if (admin.isPresent()) {
-				as.deleteById(admin.get().get_idAdmin());
+				as.deleteById(admin.get().getidAdmin());
 			}
 		} catch (Exception e) {
 			System.out.println("deleteAdmin: " + e);
