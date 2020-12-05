@@ -55,9 +55,6 @@ public class Admins implements Serializable{
 	@OneToMany(mappedBy = "admins", cascade = CascadeType.ALL)
 	private Set<Services> idService;
 	
-	@JsonBackReference
-	@OneToMany(mappedBy = "admins", cascade = CascadeType.ALL)
-	private Set<Contracts> idContract;
 
 	public Admins() {
 		
@@ -151,14 +148,6 @@ public class Admins implements Serializable{
 
 	public void setIdService(Set<Services> idService) {
 		this.idService = idService;
-	}
-
-	public Set<Contracts> getIdContract() {
-		return idContract;
-	}
-
-	public void setIdContract(Set<Contracts> idContract) {
-		this.idContract = idContract;
 	}
 	
 	

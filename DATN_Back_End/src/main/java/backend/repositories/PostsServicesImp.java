@@ -33,5 +33,4 @@ public class PostsServicesImp implements PostsServices{
 		pr.deleteById(id);
 	}
 	
-	
 }
