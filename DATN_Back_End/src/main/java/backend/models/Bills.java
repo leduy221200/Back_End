@@ -50,6 +50,11 @@ public class Bills implements Serializable{
 	private Posts Post;
 	
 	@JsonBackReference
+	@OneToOne
+	@JoinColumn(name = "idVoucher")
+	private Voucher vouchers;
+	
+	@JsonBackReference
 	@OneToMany(mappedBy = "bills", cascade = CascadeType.ALL)
 	private Set<Bill_Detail> idBillDetail;
 

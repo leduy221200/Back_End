@@ -56,17 +56,8 @@ public class Customers implements Serializable{
 	@Column(name = "Nationality")
 	private String Nationality;
 	
-	@Column(name = "Score")
-	private int Score;
-	
 	@Column(name = "BankNumber", length = 15)
 	private String BankNumber;
-	
-	@Column(name = "Role")
-	private boolean Role;
-
-	@OneToMany(mappedBy = "customers")
-	private Set<Posts> idPosts;
 	
 	@OneToMany(mappedBy = "customers", cascade = CascadeType.ALL)
 	private Set<Bills> idBills;
@@ -77,7 +68,7 @@ public class Customers implements Serializable{
 
 	public Customers(String idCustomer, String userName, String passWord, String fullName, Date birthDay,
 			String identityCard, String email, String phone, String address, String image, boolean gender,
-			String nationality, int score, String bankNumber, boolean role) {
+			String nationality, String bankNumber) {
 		this.idCustomer = idCustomer;
 		UserName = userName;
 		PassWord = passWord;
@@ -90,9 +81,7 @@ public class Customers implements Serializable{
 		Image = image;
 		Gender = gender;
 		Nationality = nationality;
-		Score = score;
 		BankNumber = bankNumber;
-		Role = role;
 	}
 
 	public String get_idCustomer() {
@@ -191,28 +180,12 @@ public class Customers implements Serializable{
 		Nationality = nationality;
 	}
 
-	public Integer getScore() {
-		return Score;
-	}
-
-	public void setScore(Integer score) {
-		Score = score;
-	}
-
 	public String getBankNumber() {
 		return BankNumber;
 	}
 
 	public void setBankNumber(String bankNumber) {
 		BankNumber = bankNumber;
-	}
-
-	public boolean isRole() {
-		return Role;
-	}
-
-	public void setRole(boolean role) {
-		Role = role;
 	}
 	
 }

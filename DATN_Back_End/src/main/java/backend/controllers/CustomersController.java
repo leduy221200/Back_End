@@ -70,19 +70,6 @@ public class CustomersController {
 		}
 	}
 	
-	@RequestMapping(value = "/customers/host", method = RequestMethod.POST)
-	public void becomeHost(@RequestBody Customers model) {
-		try {
-			Optional<Customers> customer = cs.findById(model.get_idCustomer());
-			if (customer.isPresent()) {
-				customer.get().setRole(model.isRole());
-				cs.save(customer.get());
-			}
-		} catch (Exception e) {
-			System.out.println("becomeHost: " + e);
-		}
-	}
-	
 	@RequestMapping(value = "/customers/load", method = RequestMethod.POST)
 	public Customers loadInforCustomer(@RequestBody Customers model) {
 		try {

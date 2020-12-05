@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import backend.models.Customers;
 import backend.models.Posts;
+import backend.models.Provinces;
 import backend.repositories.AdminsServices;
 import backend.repositories.CustomersServices;
 import backend.repositories.PostsServices;
+import backend.repositories.ProvincesServices;
 
 @CrossOrigin(origins = "http://127.0.0.1:5500")
 @RestController
@@ -29,6 +31,9 @@ public class PostsController {
 	
 	@Autowired
 	CustomersServices cs;
+	
+	@Autowired
+	ProvincesServices pss;
 	
 	@RequestMapping(value = "/posts", method = RequestMethod.GET)
 	public List<Posts> getAllPosts() {
@@ -45,9 +50,8 @@ public class PostsController {
 	@RequestMapping(value = "/posts/new", method = RequestMethod.POST)
 	public void addPosts(@RequestBody Customers modelCus, Posts modelPost) {
 		try {
-			if (modelCus.isRole()) {
 				ps.save(modelPost);
-			}
+
 		} catch (Exception e) {
 			System.out.println("addPosts: " + e);
 		}
@@ -83,6 +87,16 @@ public class PostsController {
 			}
 		} catch (Exception e) {
 			System.out.println("detelePosts: " + e);
+		}
+	}
+	
+	@RequestMapping(value = "/posts/province", method = RequestMethod.GET)
+	public List<Provinces> getProvices(){
+		try {
+			return (List<Provinces>) pss.findAll();
+		} catch (Exception e) {
+			System.out.println("getProvices: " + e);
+			return null;
 		}
 	}
 }
