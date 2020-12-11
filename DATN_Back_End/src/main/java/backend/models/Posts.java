@@ -1,122 +1,99 @@
 package backend.models;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "posts")
 public class Posts implements Serializable{
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "idPost", length = 5)
-	private String idPost;
+	private Integer idPost;
 	
-	@Column(name = "Price")
-	private Double Price;
+	@Column(name = "price")
+	private Double price;
 	
-	@Column(name = "ContactName", columnDefinition = "nvarchar(50)")
-	private String ContactName;
+	@Column(name = "host", columnDefinition = "nvarchar(50)")
+	private String host;
 	
-	@Column(name = "PhoneContact", length = 10)
-	private String PhoneContact;
+	@Column(name = "phoneContact", length = 10)
+	private String phoneContact;
+	
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@Temporal(TemporalType.DATE)
+	private Date postDate;
+	
 	
 	@ManyToOne
 	@JoinColumn(name = "idAdmin")
 //	@JsonBackReference
 	private Admins admins;
-	
-//	@JsonBackReference
-	@ManyToOne
-	@JoinColumn(name = "idCustomer")
-	private Customers customers;
-	
-//	@JsonBackReference
-	@OneToOne
-	@JoinColumn(name = "idVoucher")
-	private Voucher vouchers;
 
 	public Posts() {
 	
 	}
 
-
-	public Posts(String idPost, Double price, String contactName, String phoneContact, Admins admins,
-			Customers customers, Voucher vouchers) {
-		this.idPost = idPost;
-		Price = price;
-		ContactName = contactName;
-		PhoneContact = phoneContact;
-		this.admins = admins;
-		this.customers = customers;
-		this.vouchers = vouchers;
+	public Integer getIdPost() {
+		return idPost;
 	}
-
 
 	public Double getPrice() {
-		return Price;
+		return price;
 	}
 
-	public void setPrice(Double price) {
-		Price = price;
-	}
-
-
-	public String getContactName() {
-		return ContactName;
-	}
-
-	public void setContactName(String contactName) {
-		ContactName = contactName;
+	public String getHost() {
+		return host;
 	}
 
 	public String getPhoneContact() {
-		return PhoneContact;
+		return phoneContact;
 	}
 
-	public void setPhoneContact(String phoneContact) {
-		PhoneContact = phoneContact;
+	public Date getPostDate() {
+		return postDate;
 	}
-
 
 	public Admins getAdmins() {
 		return admins;
 	}
 
-	public void setAdmins(Admins admins) {
-		this.admins = admins;
-	}
-
-	public Customers getCustomers() {
-		return customers;
-	}
-
-	public void setCustomers(Customers customers) {
-		this.customers = customers;
-	}
-
-	public Voucher getVouchers() {
-		return vouchers;
-	}
-
-	public void setVouchers(Voucher vouchers) {
-		this.vouchers = vouchers;
-	}
-
-
-	public String getIdPost() {
-		return idPost;
-	}
-
-
-	public void setIdPost(String idPost) {
+	public void setIdPost(Integer idPost) {
 		this.idPost = idPost;
 	}
+
+	public void setPrice(Double price) {
+		this.price = price;
+	}
+
+	public void setHost(String host) {
+		this.host = host;
+	}
+
+	public void setPhoneContact(String phoneContact) {
+		this.phoneContact = phoneContact;
+	}
+
+	public void setPostDate(Date postDate) {
+		this.postDate = postDate;
+	}
+
+	public void setAdmins(Admins admins) {
+		this.admins = admins;
+	}	
 	
 }

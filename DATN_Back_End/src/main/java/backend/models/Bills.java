@@ -7,10 +7,12 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -28,8 +30,11 @@ public class Bills implements Serializable{
 	@Column(name="idBill",length=5)
 	private String idBill;
 	
-	@Column(name="Status")
-	private boolean Status;
+	@Column(name="status")
+	private boolean status;
+	
+	@Column(name="totalCash")
+	private Double totalCash;
 	
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	@Temporal(TemporalType.DATE)
@@ -38,6 +43,14 @@ public class Bills implements Serializable{
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	@Temporal(TemporalType.DATE)
 	private Date PayDate;
+	
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@Temporal(TemporalType.DATE)
+	private Date startDate;
+	
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@Temporal(TemporalType.DATE)
+	private Date endDate;
 	
 	@JsonBackReference
 	@ManyToOne
@@ -54,77 +67,103 @@ public class Bills implements Serializable{
 	@JoinColumn(name = "idVoucher")
 	private Voucher vouchers;
 	
-	@JsonBackReference
-	@OneToMany(mappedBy = "bills", cascade = CascadeType.ALL)
-	private Set<Bill_Detail> idBillDetail;
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinTable(name = "bill_services", 
+		joinColumns = @JoinColumn(name = "idBill"),
+		inverseJoinColumns = @JoinColumn(name = "idServices"))
+	private Set<Services> services;
 
 	public Bills() {
 		
 	}
 
-	public Bills(String idBill, boolean status, Date outputDate, Date payDate, Customers customers, Posts post) {
-		this.idBill = idBill;
-		Status = status;
-		OutputDate = outputDate;
-		PayDate = payDate;
-		this.customers = customers;
-		Post = post;
-	}
-
-	public String get_idBill() {
+	public String getIdBill() {
 		return idBill;
 	}
 
-	public void set_idBill(String idBill) {
-		this.idBill = idBill;
-	}
-
 	public boolean isStatus() {
-		return Status;
+		return status;
 	}
 
-	public void setStatus(boolean status) {
-		Status = status;
+	public Double getTotalCash() {
+		return totalCash;
 	}
 
 	public Date getOutputDate() {
 		return OutputDate;
 	}
 
-	public void setOutputDate(Date outputDate) {
-		OutputDate = outputDate;
-	}
-
 	public Date getPayDate() {
 		return PayDate;
 	}
 
-	public void setPayDate(Date payDate) {
-		PayDate = payDate;
+	public Date getStartDate() {
+		return startDate;
+	}
+
+	public Date getEndDate() {
+		return endDate;
 	}
 
 	public Customers getCustomers() {
 		return customers;
 	}
 
-	public void setCustomers(Customers customers) {
-		this.customers = customers;
-	}
-
 	public Posts getPost() {
 		return Post;
+	}
+
+	public Voucher getVouchers() {
+		return vouchers;
+	}
+
+	public void setIdBill(String idBill) {
+		this.idBill = idBill;
+	}
+
+	public void setStatus(boolean status) {
+		this.status = status;
+	}
+
+	public void setTotalCash(Double totalCash) {
+		this.totalCash = totalCash;
+	}
+
+	public void setOutputDate(Date outputDate) {
+		OutputDate = outputDate;
+	}
+
+	public void setPayDate(Date payDate) {
+		PayDate = payDate;
+	}
+
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
+	}
+
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
+	}
+
+	public void setCustomers(Customers customers) {
+		this.customers = customers;
 	}
 
 	public void setPost(Posts post) {
 		Post = post;
 	}
 
-	public Set<Bill_Detail> getIdBill_Details() {
-		return idBillDetail;
+	public void setVouchers(Voucher vouchers) {
+		this.vouchers = vouchers;
 	}
 
-	public void setIdBill_Details(Set<Bill_Detail> idBillDetail) {
-		this.idBillDetail = idBillDetail;
+	public Set<Services> getServices() {
+		return services;
 	}
+
+	public void setServices(Set<Services> services) {
+		this.services = services;
+	}
+
 
 }
