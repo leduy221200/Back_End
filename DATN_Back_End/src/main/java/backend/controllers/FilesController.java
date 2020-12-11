@@ -22,11 +22,11 @@ public class FilesController {
 		OutputStream outStream = null;
 
 		try {
-			File oldfile = new File("D:\\Fpoly\\Fall_2020\\DATN\\Front_End\\Front-End\\modules\\post\\post.html");
-			File newfile = new File("D:\\Fpoly\\Fall_2020\\DATN\\Front_End\\Front-End\\modules\\post\\" + String.valueOf(idPost) + ".html");
+			File oldfile = new File("D:\\Fpoly\\Fall_2020\\DATN\\Front_End\\myfront\\modules\\post\\post.html");
+			File newfile = new File("D:\\Fpoly\\Fall_2020\\DATN\\Front_End\\myfront\\modules\\post\\" + String.valueOf(idPost) + ".html");
 
 			if (oldfile.renameTo(newfile)) {
-				File file = new File("D:\\Fpoly\\Fall_2020\\DATN\\Front_End\\Front-End\\modules\\post\\post.html");
+				File file = new File("D:\\Fpoly\\Fall_2020\\DATN\\Front_End\\myfront\\modules\\post\\post.html");
 
 				if (file.createNewFile()) {
 					inStream = new FileInputStream(newfile);
@@ -49,6 +49,54 @@ public class FilesController {
 				System.out.println("Rename succesful");
 			} else {
 				System.out.println("Rename failed");
+			}
+		} catch (Exception e) {
+			System.out.println("file rename error: " + e);
+		} finally {
+			try {
+				inStream.close();
+				outStream.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+		}
+	}
+	
+	
+	@RequestMapping(value = "/fileHtml/listPost", method = RequestMethod.GET)
+	public void createListPostHtml(@RequestParam String idProvince) {
+		InputStream inStream = null;
+		OutputStream outStream = null;
+
+		try {
+			File oldfile = new File("D:\\Fpoly\\Fall_2020\\DATN\\Front_End\\myfront\\modules\\list_post\\listpost.html");
+			File newfile = new File("D:\\Fpoly\\Fall_2020\\DATN\\Front_End\\myfront\\modules\\list_post\\province" + idProvince + ".html");
+
+			if (oldfile.renameTo(newfile)) {
+				File file = new File("D:\\Fpoly\\Fall_2020\\DATN\\Front_End\\myfront\\modules\\list_post\\listpost.html");
+
+				if (file.createNewFile()) {
+					inStream = new FileInputStream(newfile);
+					outStream = new FileOutputStream(file);
+
+					int length;
+					byte[] buffer = new byte[1024];
+
+					while ((length = inStream.read(buffer)) > 0) {
+						outStream.write(buffer, 0, length);
+					}
+
+					System.out.println("File list post is copied successful!");
+
+					System.out.println("File list post is created!");
+				} else {
+					System.out.println("File already exists.");
+				}
+
+				System.out.println("Rename list post succesful");
+			} else {
+				System.out.println("Rename list post failed");
 			}
 		} catch (Exception e) {
 			System.out.println("file rename error: " + e);

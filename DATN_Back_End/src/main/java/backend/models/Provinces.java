@@ -19,7 +19,7 @@ public class Provinces implements Serializable{
 	private String nameProvince;
 	
 	@Column(name = "urlProvince", length = 100)
-	private String urlProvvince;
+	private String urlProvince;
 
 	public String getIdProvince() {
 		return idProvince;
@@ -30,7 +30,7 @@ public class Provinces implements Serializable{
 	}
 
 	public String getUrlProvvince() {
-		return urlProvvince;
+		return urlProvince;
 	}
 
 	public void setIdProvince(String idProvince) {
@@ -42,14 +42,14 @@ public class Provinces implements Serializable{
 	}
 
 	public void setUrlProvvince(String urlProvvince) {
-		this.urlProvvince = urlProvvince;
+		this.urlProvince = urlProvvince;
 	}
 
 	public Provinces(String idProvince, String nameProvince, String urlProvvince) {
 		super();
 		this.idProvince = idProvince;
 		this.nameProvince = nameProvince;
-		this.urlProvvince = urlProvvince;
+		this.urlProvince = urlProvvince;
 	}
 
 	public Provinces() {

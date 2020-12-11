@@ -1,5 +1,6 @@
 package backend.controllers;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,19 +42,17 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String login(@RequestBody Customers model) {
-		Optional<Customers> checkLogin = cs.findById(model.get_idCustomer());
-		if (checkLogin.isPresent()) {
-			if (checkLogin.get().getPassWord().matches(model.getPassWord())) {
-				return "/index";
-			}else {
-				message = "Password is not correct!";
-				return "/login";
-			}
+	public Customers login(@RequestBody Customers model) {
+		List<Customers> checkLogin = cs.loginCustomer(model.getUserName(), model.getPassWord());
+		if (checkLogin.size() != 0) {
+			message = "login success";
+			System.out.println(message);
+			return checkLogin.get(0);
 		}else {
-			message = "username is not correct!";
-			return "/login";
-		}	
+			message = "username or password is not correct!";
+			System.out.println(message);
+			return null;
+		}		
 	}
 	
 }
