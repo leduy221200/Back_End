@@ -39,7 +39,7 @@ public class Services implements Serializable{
 	
 	@ManyToMany(mappedBy = "services")
 	@Exclude
-	private Set<Bill_Detail> bill_detail;
+	private Set<Bills> bills;
 
 	public Services() {
 
