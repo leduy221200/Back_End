@@ -1,5 +1,6 @@
 package backend.repositories;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,7 @@ public class CustomersServicesImp implements CustomersServices{
 	}
 
 	@Override
-	public Optional<Customers> findById(String id) {
+	public Optional<Customers> findById(Integer id) {
 		return cr.findById(id);
 	}
 
@@ -28,13 +29,22 @@ public class CustomersServicesImp implements CustomersServices{
 	}
 
 	@Override
-	public void deleteById(String id) {
+	public void deleteById(Integer id) {
 		cr.deleteById(id);
 	}
 
 	@Override
-	public Integer findByUserName(String userName) {
+	public List<Customers> findByUserName(String userName) {
 		return cr.findByUserName(userName);
 	}
-		
+	
+	@Override
+	public List<Customers> loginCustomer(String userName, String passWord) {
+		return cr.loginCustomer(userName, passWord);
+	}
+	
+	@Override
+	public Optional<Customers> findCustomerByEmailUserName(String userName, String email) {
+		return cr.findCustomerByEmailUserName(userName, email);
+	}	
 }

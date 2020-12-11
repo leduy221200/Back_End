@@ -1,19 +1,24 @@
 package backend.repositories;
 
+import java.util.List;
 import java.util.Optional;
 
 import backend.models.Customers;
 
 public interface CustomersServices {
 
-	void deleteById(String id);
+	void deleteById(Integer id);
 
 	Iterable<Customers> findAll();
 
-	Optional<Customers> findById(String id);
+	Optional<Customers> findById(Integer id);
 
 	<S extends Customers> S save(S entity);
 
-	Integer findByUserName(String userName);
+	List<Customers> findByUserName(String userName);
+	
+	List<Customers> loginCustomer(String userName, String passWord);
+	
+	Optional<Customers> findCustomerByEmailUserName(String username, String email);
 	
 }

@@ -7,6 +7,8 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -18,15 +20,17 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Entity
 @Table(name = "customers")
 public class Customers implements Serializable{
+	
 	@Id
-	@Column(name = "idCustomer", length = 5)
-	private String idCustomer;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "idCustomer")
+	private Integer idCustomer;
 	
 	@Column(name = "UserName", length = 15)
-	private String UserName;
+	private String userName;
 	
-	@Column(name = "PassWord", length = 20)
-	private String PassWord;
+	@Column(name = "PassWord", length = 100)
+	private String passWord;
 	
 	@Column(name = "FullName", columnDefinition = "nvarchar(50)")
 	private String FullName;
@@ -66,12 +70,12 @@ public class Customers implements Serializable{
 
 	}
 
-	public Customers(String idCustomer, String userName, String passWord, String fullName, Date birthDay,
+	public Customers(Integer idCustomer, String userName, String passWord, String fullName, Date birthDay,
 			String identityCard, String email, String phone, String address, String image, boolean gender,
 			String nationality, String bankNumber) {
 		this.idCustomer = idCustomer;
-		UserName = userName;
-		PassWord = passWord;
+		this.userName = userName;
+		this.passWord = passWord;
 		FullName = fullName;
 		BirthDay = birthDay;
 		IdentityCard = identityCard;
@@ -84,28 +88,28 @@ public class Customers implements Serializable{
 		BankNumber = bankNumber;
 	}
 
-	public String get_idCustomer() {
+	public Integer get_idCustomer() {
 		return idCustomer;
 	}
 
-	public void set_idCustomer(String _idCustomer) {
+	public void set_idCustomer(Integer _idCustomer) {
 		this.idCustomer = _idCustomer;
 	}
 
 	public String getUserName() {
-		return UserName;
+		return userName;
 	}
 
 	public void setUserName(String userName) {
-		UserName = userName;
+		this.userName = userName;
 	}
 
 	public String getPassWord() {
-		return PassWord;
+		return passWord;
 	}
 
 	public void setPassWord(String passWord) {
-		PassWord = passWord;
+		this.passWord = passWord;
 	}
 
 	public String getFullName() {
@@ -186,6 +190,14 @@ public class Customers implements Serializable{
 
 	public void setBankNumber(String bankNumber) {
 		BankNumber = bankNumber;
+	}
+
+	@Override
+	public String toString() {
+		return "Customers [idCustomer=" + idCustomer + ", userName=" + userName + ", passWord=" + passWord
+				+ ", FullName=" + FullName + ", BirthDay=" + BirthDay + ", IdentityCard=" + IdentityCard + ", Email="
+				+ Email + ", Phone=" + Phone + ", Address=" + Address + ", Image=" + Image + ", Gender=" + Gender
+				+ ", Nationality=" + Nationality + ", BankNumber=" + BankNumber + ", idBills=" + idBills + "]";
 	}
 	
 }
