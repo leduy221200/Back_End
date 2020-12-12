@@ -5,8 +5,8 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+//import javax.persistence.GeneratedValue;
+//import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -21,7 +21,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class Posts implements Serializable{
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+//	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "idPost", length = 5)
 	private Integer idPost;
 	
@@ -31,7 +31,7 @@ public class Posts implements Serializable{
 	@Column(name = "host", columnDefinition = "nvarchar(50)")
 	private String host;
 	
-	@Column(name = "phoneContact", length = 10)
+	@Column(name = "phoneContact", length = 15)
 	private String phoneContact;
 	
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
