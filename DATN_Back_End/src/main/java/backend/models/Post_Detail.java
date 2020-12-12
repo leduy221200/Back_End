@@ -55,9 +55,6 @@ public class Post_Detail {
 	@Field(name = "address")
 	private String address;
 	
-	@Field(name = "contact_name")
-	private String contactName;
-	
 	@Field(name = "phone_contact")
 	private String phoneContact;
 	
@@ -131,10 +128,6 @@ public class Post_Detail {
 		return address;
 	}
 
-	public String getContactName() {
-		return contactName;
-	}
-
 	public String getPhoneContact() {
 		return phoneContact;
 	}
@@ -205,10 +198,6 @@ public class Post_Detail {
 
 	public void setAddress(String address) {
 		this.address = address;
-	}
-
-	public void setContactName(String contactName) {
-		this.contactName = contactName;
 	}
 
 	public void setPhoneContact(String phoneContact) {
