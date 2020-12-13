@@ -48,7 +48,7 @@ public class Customers implements Serializable{
 	@Column(name = "Phone", length = 10)
 	private String Phone;
 	
-	@Column(name = "Address", length = 50)
+	@Column(name = "Address", columnDefinition = "nvarchar(50)")
 	private String Address;
 	
 	@Column(name = "Image", length = 100)

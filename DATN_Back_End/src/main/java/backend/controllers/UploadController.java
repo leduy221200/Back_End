@@ -20,8 +20,11 @@ import java.util.stream.Collectors;
 
 @RestController
 public class UploadController {
-	
-	private void CheckFolder() {
+
+    @Autowired
+    private FileStorageService fileStorageService;
+    
+    private void CheckFolder() {
 		File f = new File("./src/main/resources/static/upload");
 		 
         if (f.exists()) {
@@ -34,14 +37,11 @@ public class UploadController {
             System.out.println("Foler created!");
         }
 	}
-
-    @Autowired
-    private FileStorageService fileStorageService;
     
     @RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
     public UploadResponse uploadFile(@RequestParam("file") MultipartFile file) {  
     	CheckFolder();
-        String fileName = fileStorageService.storeFile(file);
+        String fileName = fileStorageService.storeFile(file);  
 
         String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path("/downloadFile/")

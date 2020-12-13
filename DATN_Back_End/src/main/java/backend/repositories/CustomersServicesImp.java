@@ -39,6 +39,11 @@ public class CustomersServicesImp implements CustomersServices{
 	}
 	
 	@Override
+	public Optional<Customers> findCustomerByUserName(String userName) {
+		return cr.findCustomerByUserName(userName);
+	}
+	
+	@Override
 	public List<Customers> loginCustomer(String userName, String passWord) {
 		return cr.loginCustomer(userName, passWord);
 	}

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import backend.models.Services;
@@ -60,9 +61,10 @@ public class ServicesController {
 	}
 	
 	@RequestMapping(value="/services/delete", method = RequestMethod.POST)
-	public void deleteServices(@RequestBody Services model) {
+	public void deleteServices(@RequestParam String idService) {
 		try {
-			Optional<Services> services = ss.findById(model.get_idServices());
+			Optional<Services> services = ss.findById(idService);
+			System.out.println(services);
 			if (services.isPresent()) {
 				ss.deleteById(services.get().get_idServices());
 			}		
