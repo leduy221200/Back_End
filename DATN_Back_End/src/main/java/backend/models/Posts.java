@@ -38,7 +38,6 @@ public class Posts implements Serializable{
 	@Temporal(TemporalType.DATE)
 	private Date postDate;
 	
-	
 	@ManyToOne
 	@JoinColumn(name = "idAdmin")
 //	@JsonBackReference

@@ -55,7 +55,6 @@ public class Admins implements Serializable{
 	@OneToMany(mappedBy = "admins", cascade = CascadeType.ALL)
 	private Set<Services> idService;
 	
-
 	public Admins() {
 		
 	}
@@ -149,6 +148,5 @@ public class Admins implements Serializable{
 	public void setIdService(Set<Services> idService) {
 		this.idService = idService;
 	}
-	
 	
 }

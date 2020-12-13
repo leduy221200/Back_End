@@ -59,16 +59,17 @@ public class CustomersController {
 	@RequestMapping(value = "/customers/edit", method = RequestMethod.POST)
 	public String EditCustomer(@RequestBody Customers model) {
 		try {
-			Optional<Customers> customer = cs.findById(model.get_idCustomer());
+			Optional<Customers> customer = cs.findCustomerByUserName(model.getUserName());
 			if (customer.isPresent()) {
 				customer.get().setFullName(model.getFullName());
+				customer.get().setPassWord(model.getPassWord());
 				customer.get().setBirthDay(model.getBirthDay());
 				customer.get().setBankNumber(model.getBankNumber());
 				customer.get().setGender(model.isGender());
-				customer.get().setImage(model.getImage());
 				customer.get().setNationality(model.getNationality());
 				customer.get().setPhone(model.getPhone());
 				customer.get().setIdentityCard(model.getIdentityCard());
+				customer.get().setAddress(model.getAddress());
 				cs.save(customer.get());
 				return "Cập nhật thông tin thành công!";
 			}else {
@@ -77,6 +78,23 @@ public class CustomersController {
 		} catch (Exception e) {
 			System.out.println("EditCustomer: " + e);
 			return "Cập nhật thông tin thất bại!";
+		}
+	}
+	
+	@RequestMapping(value = "/customers/edit/upload", method = RequestMethod.POST)
+	public String EditImgCustomer(@RequestParam String userName, @RequestParam String image) {
+		try {
+			Optional<Customers> customer = cs.findCustomerByUserName(userName);
+			if (customer.isPresent()) {
+				customer.get().setImage(image);
+				cs.save(customer.get());
+				return "Cập nhật avatar thành công!";
+			}else {
+				return "Cập nhật avatar thất bại!";
+			}
+		} catch (Exception e) {
+			System.out.println("EditImgCustomer: " + e);
+			return "Cập nhật avatar thất bại!";
 		}
 	}
 	

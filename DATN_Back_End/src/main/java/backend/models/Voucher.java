@@ -37,9 +37,8 @@ public class Voucher implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date EndDate;
 	
-//	@JsonManagedReference
-	@JsonBackReference
 	@ManyToOne
+	@JsonBackReference
 	@JoinColumn(name = "idAdmin")
 	private Admins admins;
 	

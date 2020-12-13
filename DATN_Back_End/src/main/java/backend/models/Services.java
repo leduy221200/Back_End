@@ -11,6 +11,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import net.bytebuddy.build.ToStringPlugin.Exclude;
 
 @Entity
@@ -34,6 +36,7 @@ public class Services implements Serializable{
 	private boolean Status;
 	
 	@ManyToOne
+//	@JsonBackReference
 	@JoinColumn(name = "idAdmin")
 	private Admins admins;
 	

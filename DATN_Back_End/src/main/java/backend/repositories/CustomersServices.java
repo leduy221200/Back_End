@@ -21,4 +21,5 @@ public interface CustomersServices {
 	
 	Optional<Customers> findCustomerByEmailUserName(String username, String email);
 	
+	Optional<Customers> findCustomerByUserName(String userName);
 }
