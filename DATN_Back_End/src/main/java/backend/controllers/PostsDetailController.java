@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import backend.models.Post_Detail;
+import backend.repositories.PostsDetailRepository;
 import backend.repositories.PostsDetailServices;
 
 @CrossOrigin(origins = "http://127.0.0.1:5500")
@@ -49,6 +50,17 @@ public class PostsDetailController {
 			return ls;
 		} catch (Exception e) {
 			System.out.println("postDetailByIdPost: " + e);
+			return null;
+		}
+	}
+	
+	@RequestMapping(value = "/posts/find/province", method = RequestMethod.POST)
+	public List<Post_Detail> postFindByProvince (@RequestParam String keyWord){
+		try {
+			List<Post_Detail> ls = pds.findByProvinceLike(keyWord);
+			return ls;
+		} catch (Exception e) {
+			System.out.println("postFindByProvince: " + e);
 			return null;
 		}
 	}

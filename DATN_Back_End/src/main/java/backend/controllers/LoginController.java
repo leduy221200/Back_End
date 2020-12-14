@@ -30,14 +30,14 @@ public class LoginController {
 		Optional<Admins> checkLogin = as.findById(model.getidAdmin());
 		if (checkLogin.isPresent()) {
 			if (checkLogin.get().getPassWord().matches(model.getPassWord())) {
-				return "/adminManager";
+				return "login success";
 			}else {
 				message = "Password is not correct!";
-				return "/loginAdmin";
+				return message;
 			}
 		}else {
 			message = "id is not correct!";
-			return "/loginAdmin";
+			return message;
 		}	
 	}
 	
