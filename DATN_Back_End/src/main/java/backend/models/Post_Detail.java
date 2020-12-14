@@ -1,11 +1,16 @@
 //Post detail in mongoDB.
 package backend.models;
+import java.util.Date;
 import java.util.List;
+
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
+import org.springframework.format.annotation.DateTimeFormat;
 
 
 @Document(collection = "post_detail")
@@ -63,6 +68,11 @@ public class Post_Detail {
 	
 	@Field(name = "rating")
 	private String rating;
+	
+	@Field(name = "postDate")
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@Temporal(TemporalType.DATE)
+	private Date postDate;
 
 	public Post_Detail() {
 
@@ -210,6 +220,14 @@ public class Post_Detail {
 
 	public void setRating(String rating) {
 		this.rating = rating;
+	}
+
+	public Date getPostDate() {
+		return postDate;
+	}
+
+	public void setPostDate(Date postDate) {
+		this.postDate = postDate;
 	}
 	
 }

@@ -61,7 +61,7 @@ public class Customers implements Serializable{
 	@Column(name = "Gender")
 	private boolean Gender;
 	
-	@Column(name = "Nationality")
+	@Column(name = "Nationality", columnDefinition = "nvarchar(30)")
 	private String Nationality;
 	
 	@Column(name = "BankNumber", length = 15)

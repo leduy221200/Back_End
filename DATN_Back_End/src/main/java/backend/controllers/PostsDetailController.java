@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import backend.models.Post_Detail;
-import backend.repositories.PostsDetailRepository;
 import backend.repositories.PostsDetailServices;
 
 @CrossOrigin(origins = "http://127.0.0.1:5500")
@@ -36,7 +36,7 @@ public class PostsDetailController {
 	@RequestMapping(value = "/posts/ProviceId", method = RequestMethod.GET)
 	public List<Post_Detail> postDetailByPage (@RequestParam String provinceId, @RequestParam Integer page){
 		try {
-			List<Post_Detail> ls = pds.findByProvinceId(provinceId, PageRequest.of(page, 20));	
+			List<Post_Detail> ls = pds.findByProvinceId(provinceId, PageRequest.of(page, 20, Sort.by("postDate").descending()));	
 			return ls;
 		} catch (Exception e) {
 			System.out.println("postDetailByPage: " + e);
@@ -44,7 +44,7 @@ public class PostsDetailController {
 		}
 	}
 	
-	@RequestMapping(value = "/posts/insert", method = RequestMethod.GET)
+	@RequestMapping(value = "/posts/insert", method = RequestMethod.POST)
 	public String insertPostDetail (@RequestBody Post_Detail model){
 		try {
 			pds.insert(model);

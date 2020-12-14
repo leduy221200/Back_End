@@ -28,7 +28,7 @@ public class Posts implements Serializable{
 	@Column(name = "price")
 	private Double price;
 	
-	@Column(name = "host", columnDefinition = "nvarchar(50)")
+	@Column(name = "host", columnDefinition = "nvarchar(200)")
 	private String host;
 	
 	@Column(name = "phoneContact", length = 15)

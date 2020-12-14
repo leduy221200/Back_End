@@ -11,14 +11,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import backend.models.Customers;
 import backend.models.Posts;
 import backend.models.Provinces;
 import backend.repositories.AdminsServices;
 import backend.repositories.CustomersServices;
 import backend.repositories.PostsServices;
 import backend.repositories.ProvincesService;
-import backend.repositories.ProvincesServicesImp;
 
 @CrossOrigin(origins = "http://127.0.0.1:5500")
 @RestController
@@ -49,10 +47,9 @@ public class PostsController {
 	}
 	
 	@RequestMapping(value = "/posts/new", method = RequestMethod.POST)
-	public void addPosts(@RequestBody Customers modelCus, Posts modelPost) {
+	public void addPosts(@RequestBody Posts modelPost) {
 		try {
 				ps.save(modelPost);
-
 		} catch (Exception e) {
 			System.out.println("addPosts: " + e);
 		}
