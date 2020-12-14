@@ -1,5 +1,6 @@
 package backend.repositories;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,20 @@ public class BillsServices implements BillsServicesImp{
 	public void deleteById(String id) {
 		br.deleteById(id);
 	}
+
+	@Override
+	public List<Bills> thongKeDoanhThu() {
+		return br.thongKeDoanhThu();
+	}
+
+	@Override
+	public List<String> getAllBill() {
+		return br.getAllBill();
+	}
+	
+	
+	
+	
 	
 	
 }
