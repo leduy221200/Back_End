@@ -63,6 +63,10 @@ public class Customers implements Serializable{
 	@Column(name = "BankNumber", length = 15)
 	private String BankNumber;
 	
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@Temporal(TemporalType.DATE)
+	private Date Registerdate;
+	
 	@OneToMany(mappedBy = "customers", cascade = CascadeType.ALL)
 	private Set<Bills> idBills;
 
@@ -72,7 +76,7 @@ public class Customers implements Serializable{
 
 	public Customers(Integer idCustomer, String userName, String passWord, String fullName, Date birthDay,
 			String identityCard, String email, String phone, String address, String image, boolean gender,
-			String nationality, String bankNumber) {
+			String nationality, String bankNumber, Date registerdate) {
 		this.idCustomer = idCustomer;
 		this.userName = userName;
 		this.passWord = passWord;
@@ -86,6 +90,15 @@ public class Customers implements Serializable{
 		Gender = gender;
 		Nationality = nationality;
 		BankNumber = bankNumber;
+		Registerdate = registerdate;
+	}
+
+	public Date getRegisterdate() {
+		return Registerdate;
+	}
+
+	public void setRegisterdate(Date registerdate) {
+		Registerdate = registerdate;
 	}
 
 	public Integer get_idCustomer() {
@@ -197,7 +210,7 @@ public class Customers implements Serializable{
 		return "Customers [idCustomer=" + idCustomer + ", userName=" + userName + ", passWord=" + passWord
 				+ ", FullName=" + FullName + ", BirthDay=" + BirthDay + ", IdentityCard=" + IdentityCard + ", Email="
 				+ Email + ", Phone=" + Phone + ", Address=" + Address + ", Image=" + Image + ", Gender=" + Gender
-				+ ", Nationality=" + Nationality + ", BankNumber=" + BankNumber + ", idBills=" + idBills + "]";
+				+ ", Nationality=" + Nationality + ", BankNumber=" + BankNumber + ", idBills=" + idBills + ", registerDate=" + Registerdate + "]";
 	}
 	
 }

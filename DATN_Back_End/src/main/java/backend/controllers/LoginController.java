@@ -25,20 +25,38 @@ public class LoginController {
 	@Autowired
 	CustomersServices cs;
 	
+	
+	
 	@RequestMapping(value = "/loginAdmin", method = RequestMethod.POST)
 	public String loginAdmin(@RequestBody Admins model) {	
-		Optional<Admins> checkLogin = as.findById(model.getidAdmin());
-		if (checkLogin.isPresent()) {
-			if (checkLogin.get().getPassWord().matches(model.getPassWord())) {
-				return "login success";
+		if(model.getidAdmin().indexOf("@gmail.com") == -1) {
+			Optional<Admins> checkLogin = as.findById(model.getidAdmin());
+			if (checkLogin.isPresent()) {
+				if (checkLogin.get().getPassWord().matches(model.getPassWord())) {
+					return "login success";
+				}else {				
+					message = "Password is not correct!";
+					return message;
+				}
 			}else {
-				message = "Password is not correct!";
+				message = "id is not correct!";
 				return message;
+			}	
+		} else {
+			List<Admins> list = as.getAllAdmin();
+			for (Admins admins : list) {
+				if(admins.getEmail().equals(model.getidAdmin())) {
+					if (admins.getPassWord().matches(model.getPassWord())) {
+						return "login success";
+					}else {				
+						message = "Password is not correct!";
+						return message;
+					}
+				}			
 			}
-		}else {
-			message = "id is not correct!";
+			message = "email is not correct!";
 			return message;
-		}	
+		}
 	}
 	
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
