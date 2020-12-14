@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import backend.models.Customers;
@@ -16,7 +17,8 @@ import backend.models.Provinces;
 import backend.repositories.AdminsServices;
 import backend.repositories.CustomersServices;
 import backend.repositories.PostsServices;
-import backend.repositories.ProvincesServices;
+import backend.repositories.ProvincesService;
+import backend.repositories.ProvincesServicesImp;
 
 @CrossOrigin(origins = "http://127.0.0.1:5500")
 @RestController
@@ -32,7 +34,7 @@ public class PostsController {
 	CustomersServices cs;
 	
 	@Autowired
-	ProvincesServices pss;
+	ProvincesService pss;
 	
 	@RequestMapping(value = "/posts", method = RequestMethod.GET)
 	public List<Posts> getAllPosts() {
@@ -64,6 +66,16 @@ public class PostsController {
 		} catch (Exception e) {
 			System.out.println("getProvices: " + e);
 			return null;
+		}
+	}
+	
+	@RequestMapping(value = "/provinceName", method = RequestMethod.GET)
+	public String getProvicesIdByName(@RequestParam String provinceName){
+		try {
+			return pss.getIdByName(provinceName);
+		} catch (Exception e) {
+			System.out.println("getProvices: " + e);
+			return "";
 		}
 	}
 }

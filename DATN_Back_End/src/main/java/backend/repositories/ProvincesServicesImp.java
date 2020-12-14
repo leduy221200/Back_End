@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import backend.models.Provinces;
 
 @Service
-public class ProvincesServices implements ProvincesServiceImp{
+public class ProvincesServicesImp implements ProvincesService{
 	
 	@Autowired
 	ProvincesRepository pre;
@@ -14,6 +14,11 @@ public class ProvincesServices implements ProvincesServiceImp{
 	@Override
 	public Iterable<Provinces> findAll() {
 		return pre.findAll();
+	}
+	
+	@Override
+	public String getIdByName(String province) {
+		return pre.getIdByName(province);
 	}
 
 }

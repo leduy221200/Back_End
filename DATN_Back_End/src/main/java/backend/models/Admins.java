@@ -15,7 +15,7 @@ import javax.persistence.TemporalType;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "admins")
@@ -43,15 +43,12 @@ public class Admins implements Serializable{
 	@Column( name = "Status")
 	private boolean Status;
 	
-	@JsonBackReference
 	@OneToMany(mappedBy = "admins", cascade = CascadeType.ALL)
 	private Set<Voucher> idVoucher;
 	
-	@JsonBackReference
 	@OneToMany(mappedBy = "admins", cascade = CascadeType.ALL)
 	private Set<Posts> idPost;
 	
-	@JsonBackReference
 	@OneToMany(mappedBy = "admins", cascade = CascadeType.ALL)
 	private Set<Services> idService;
 	
@@ -125,26 +122,32 @@ public class Admins implements Serializable{
 		Status = status;
 	}
 
+	@JsonIgnore
 	public Set<Voucher> getVoucher() {
 		return idVoucher;
 	}
 
+	@JsonIgnore
 	public void setVoucher(Set<Voucher> idVoucher) {
 		this.idVoucher = idVoucher;
 	}
 
+	@JsonIgnore
 	public Set<Posts> getidPost() {
 		return idPost;
 	}
 
+	@JsonIgnore
 	public void set_idPost(Set<Posts> idPost) {
 		this.idPost = idPost;
 	}
 
+	@JsonIgnore
 	public Set<Services> getIdService() {
 		return idService;
 	}
 
+	@JsonIgnore
 	public void setIdService(Set<Services> idService) {
 		this.idService = idService;
 	}

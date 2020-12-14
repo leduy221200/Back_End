@@ -33,4 +33,9 @@ public class PostsDetailServicesImp implements PostsDetailServices{
 		return pdr.findByIdPost(idPost);
 	}
 	
+	@Override
+	public List<Post_Detail> findByProvinceLike(String keyWord) {
+		return pdr.findByProvinceLike(keyWord);
+	}
+	
 }

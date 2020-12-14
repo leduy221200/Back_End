@@ -15,8 +15,6 @@ import javax.persistence.TemporalType;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 @Entity
 @Table(name = "vouchers")
 public class Voucher implements Serializable {
@@ -38,7 +36,7 @@ public class Voucher implements Serializable {
 	private Date EndDate;
 	
 	@ManyToOne
-	@JsonBackReference
+//	@JsonBackReference
 	@JoinColumn(name = "idAdmin")
 	private Admins admins;
 	

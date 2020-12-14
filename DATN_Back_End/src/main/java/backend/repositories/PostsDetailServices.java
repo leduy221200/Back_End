@@ -15,5 +15,7 @@ public interface PostsDetailServices {
 	List<Post_Detail> findByProvinceId(String provinceId);
 
 	List<Post_Detail> findByIdPost(Integer idPost);
+	
+	List<Post_Detail> findByProvinceLike(String keyWord);
 
 }
