@@ -42,6 +42,7 @@ public class UploadController {
     public UploadResponse uploadFile(@RequestParam("file") MultipartFile file) {  
     	CheckFolder();
         String fileName = fileStorageService.storeFile(file);  
+        System.out.println(fileName);
 
         String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path("/downloadFile/")
@@ -55,6 +56,7 @@ public class UploadController {
     @RequestMapping(value = "/uploadFiles", method = RequestMethod.POST)
     public List<UploadResponse> uploadMultipleFiles(@RequestParam("files") MultipartFile[] files) {
     	CheckFolder();
+    	String urlDir = "http://localhost:8080/upload/";
         return Arrays.asList(files)
                 .stream()
                 .map(file -> uploadFile(file))

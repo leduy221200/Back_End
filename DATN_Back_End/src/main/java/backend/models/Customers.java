@@ -39,6 +39,10 @@ public class Customers implements Serializable{
 	@Temporal(TemporalType.DATE)
 	private Date BirthDay;
 	
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@Temporal(TemporalType.DATE)
+	private Date registDay;
+	
 	@Column(name = "IdentityCard", length = 9)
 	private String IdentityCard;
 	
@@ -198,6 +202,14 @@ public class Customers implements Serializable{
 				+ ", FullName=" + FullName + ", BirthDay=" + BirthDay + ", IdentityCard=" + IdentityCard + ", Email="
 				+ Email + ", Phone=" + Phone + ", Address=" + Address + ", Image=" + Image + ", Gender=" + Gender
 				+ ", Nationality=" + Nationality + ", BankNumber=" + BankNumber + ", idBills=" + idBills + "]";
+	}
+
+	public Date getRegistDay() {
+		return registDay;
+	}
+
+	public void setRegistDay(Date registDay) {
+		this.registDay = registDay;
 	}
 	
 }

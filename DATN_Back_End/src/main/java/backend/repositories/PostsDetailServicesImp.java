@@ -38,4 +38,14 @@ public class PostsDetailServicesImp implements PostsDetailServices{
 		return pdr.findByProvinceLike(keyWord);
 	}
 	
+	@Override
+	public List<Post_Detail> findByProvinceLikePage(String keyWord, Pageable pageable) {
+		return pdr.findByProvinceLike(keyWord, pageable);
+	}
+
+	@Override
+	public <S extends Post_Detail> S insert(S entity) {
+		return pdr.insert(entity);
+	}
+	
 }

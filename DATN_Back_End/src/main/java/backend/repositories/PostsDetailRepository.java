@@ -20,7 +20,7 @@ public interface PostsDetailRepository extends MongoRepository<Post_Detail, Obje
 	
 	@Query("{province: /.*?0.*/}")
 	List<Post_Detail> findByProvinceLike(String keyWord);
-	
 
-	
+	@Query("{province: /.*?0.*/}")
+	List<Post_Detail> findByProvinceLike(String keyWord, Pageable pageable);
 }

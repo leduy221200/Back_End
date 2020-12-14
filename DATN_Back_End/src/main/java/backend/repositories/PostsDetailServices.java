@@ -17,5 +17,8 @@ public interface PostsDetailServices {
 	List<Post_Detail> findByIdPost(Integer idPost);
 	
 	List<Post_Detail> findByProvinceLike(String keyWord);
+	List<Post_Detail> findByProvinceLikePage(String keyWord, Pageable pageable);
+
+	<S extends Post_Detail> S insert(S entity);
 
 }
